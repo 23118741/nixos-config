@@ -77,6 +77,42 @@
     nix-direnv.enable = true; # Better caching (speeds up shell loading)
   };
 
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+
+    # Custom Settings
+    settings = {
+      add_newline = true; # Adds space between commands
+
+      # This puts the prompt on two lines
+      # Line 1: Directory, Git info, etc.
+      # Line 2: The typing cursor
+      line_break = {
+        disabled = false;
+      };
+
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[✗](bold red)";
+      };
+
+      directory = {
+        truncation_length = 3; # Only show last 3 folders (keeps it short)
+        truncate_to_repo = true; # If inside git, show path relative to git root
+        style = "bold cyan";
+      };
+
+      # Optional: Disable showing 'guus@nixos' unless you are SSH-ed in
+      username = {
+        style_user = "white bold";
+        show_always = false;
+      };
+      hostname = {
+        ssh_only = true;
+      };
+    };
+  };
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
