@@ -6,6 +6,8 @@
     ../../modules/home-manager/alacritty.nix
     ../../modules/home-manager/i3.nix
     ../../modules/home-manager/nvim.nix
+    ../../modules/home-manager/starship.nix
+    ../../modules/home-manager/shell.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
