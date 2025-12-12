@@ -96,6 +96,14 @@
     ];
   };
 
+  # Enable Docker
+  virtualisation.docker.enable = true;
+
+  # Optional but recommended: also enable containerd if you ever use nerdctl/podman
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
   # Install firefox.
   programs.firefox.enable = true;
 
