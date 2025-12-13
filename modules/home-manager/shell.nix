@@ -15,9 +15,9 @@
       '';
 
       # ── Web project shortcuts ─────────────────
-      veiling = "cd ~/Projects/github.com/guus/VeilingAIWebApplicatieRealNotFake";
-      backend = "veiling && cd backend && direnv reload && ASPNETCORE_URLS=http://localhost:5000 dotnet watch";
-      frontend = "veiling && direnv reload && cd frontend && npm run dev";
+      veiling = "cd ~/Projects/github.com/guus/VeilingAIWebApplicatieRealNotFake && direnv reload";
+      backend = "veiling && cd backend && ASPNETCORE_URLS=http://localhost:5000 dotnet watch";
+      frontend = "veiling && cd frontend && npm run dev";
       db-up = "veiling && docker compose up -d";
       db-down = "veiling && docker compose down";
 
