@@ -25,20 +25,18 @@
           require('avante').setup({
             provider = "openai", 
             
-            -- Disable ghost text to save Rate Limits
+            -- Disable features that trigger complex tool calls
             auto_suggestions = false,
-            
-            -- Disable dual boost (it often triggers the Tool ID error)
             dual_boost = { enabled = false },
-
+            
             providers = {
               openai = {
                 endpoint = "https://openrouter.ai/api/v1",
                 
-                -- FIX: Use Mistral Nemo.
-                -- Devstral (2512) is broken on OpenRouter for tools/function calling right now.
-                model = "mistralai/mistral-nemo:free",
+                -- The exact model you requested
+                model = "mistralai/devstral-2512:free",
                 
+                -- Your specific key variable
                 api_key_name = "API_KEY",
                 
                 timeout = 30000,
