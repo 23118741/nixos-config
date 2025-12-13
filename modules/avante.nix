@@ -7,8 +7,7 @@
 
     extraPlugins = with pkgs.vimPlugins; {
 
-      # --- Dependencies ---
-      # We remove the 'setup' here because we will manually load it below
+      # Remove 'setup' here to let Avante handle it
       dressing-nvim = {
         package = dressing-nvim;
       };
@@ -32,7 +31,15 @@
             
             providers = {
               gemini = {
-                model = "gemini-1.5-flash",
+                -- Explicitly point to the OpenAI-compatible endpoint
+                endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/",
+                
+                -- Use the exact versioned model name
+                model = "gemini-1.5-flash-latest",
+                
+                -- Ensure the key name is set
+                api_key_name = "GEMINI_API_KEY",
+                
                 temperature = 0,
                 max_tokens = 4096,
               },
