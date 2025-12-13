@@ -1,12 +1,13 @@
 { pkgs, ... }:
 
 {
-  programs.nvf.settings.vim = {
-
+  vim = {
+    # Curl is required for API requests
     extraPackages = with pkgs; [ curl ];
 
     extraPlugins = with pkgs.vimPlugins; {
 
+      # --- Dependencies ---
       dressing-nvim = {
         package = dressing-nvim;
       };
@@ -17,30 +18,34 @@
         package = plenary-nvim;
       };
 
+      # --- Main Plugin ---
       avante-nvim = {
         package = avante-nvim;
         setup = ''
+          -- 1. Force load UI first
           require('dressing').setup()
 
+          -- 2. Configure Avante for OpenRouter (Mistral)
           require('avante').setup({
-            provider = "gemini", 
+            -- We use the OpenAI driver because OpenRouter mimics OpenAI
+            provider = "openai", 
             
-            -- Keep Ghost Text OFF to save RPM (Requests Per Minute)
+            -- Disable auto-suggestions to prevent hitting Rate Limits
             auto_suggestions = false,
-            dual_boost = { enabled = false },
-
+            
             providers = {
-              gemini = {
-                -- Switch to the LITE model found in your list
-                -- This is the most efficient model for large context
-                model = "gemini-2.0-flash",
+              openai = {
+                endpoint = "https://openrouter.ai/api/v1",
                 
-                api_key_name = "GEMINI_API_KEY",
+                -- The OpenRouter ID for Mistral's Free Coding Model
+                model = "mistralai/codestral-2501:free",
+                
+                api_key_name = "OPENROUTER_API_KEY",
+                
+                -- Mistral supports large context, but outputting 8k is safe
+                max_tokens = 8192,
                 
                 temperature = 0,
-                
-                -- Gemini Flash/Lite supports large output, 8192 is a safe max for summaries
-                max_tokens = 8192,
               },
             },
           })
