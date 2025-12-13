@@ -3,12 +3,10 @@
 {
   programs.nvf.settings.vim = {
 
-    # Avante needs curl to make API requests
     extraPackages = with pkgs; [ curl ];
 
     extraPlugins = with pkgs.vimPlugins; {
 
-      # --- Dependencies ---
       dressing-nvim = {
         package = dressing-nvim;
         setup = "require('dressing').setup()";
@@ -21,21 +19,42 @@
         package = plenary-nvim;
       };
 
-      # --- Main Plugin ---
       avante-nvim = {
         package = avante-nvim;
         setup = ''
           require('avante').setup({
             provider = "groq", 
             
-            -- Configure Groq using the environment variable
+            -- We use 'vendors' but fully define it to avoid the deprecation warning
             vendors = {
               groq = {
-                __inherited_from = "openai",
-                api_key_name = "GROQ_API_KEY", 
-                endpoint = "https://api.groq.com/openai/v1/",
+                endpoint = "https://api.groq.com/openai/v1/chat/completions",
                 model = "llama-3.3-70b-versatile",
-                max_tokens = 4096,
+                api_key_name = "GROQ_API_KEY",
+                
+                -- Explicitly define how to handle the request (Bulletproof method)
+                parse_curl_args = function(opts, code_opts)
+                  return {
+                    url = opts.endpoint,
+                    headers = {
+                      ["Accept"] = "application/json",
+                      ["Content-Type"] = "application/json",
+                      ["Authorization"] = "Bearer " .. os.getenv(opts.api_key_name),
+                    },
+                    body = {
+                      model = opts.model,
+                      messages = require("avante.providers").openai.parse_messages(code_opts),
+                      temperature = 0,
+                      max_tokens = 4096,
+                      stream = true,
+                    },
+                  }
+                end,
+                
+                -- Explicitly define how to read the response
+                parse_response_data = function(data_stream, event_state, opts)
+                  require("avante.providers").openai.parse_response(data_stream, event_state, opts)
+                end,
               },
             },
           })
