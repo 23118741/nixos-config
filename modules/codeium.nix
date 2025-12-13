@@ -3,24 +3,26 @@
 {
   programs.nvf.settings.vim = {
 
-    # Codeium requirements
     extraPackages = with pkgs; [
       gzip
       curl
       coreutils
+      # 1. Install the official NixOS Codeium binary
+      codeium
     ];
 
     extraPlugins = with pkgs.vimPlugins; {
-
-      # CHANGE: The package name is now 'windsurf-nvim'
       windsurf-nvim = {
         package = windsurf-nvim;
 
-        # We still try to require "codeium" first.
-        # If this fails later, we will try "windsurf".
+        # 2. Point the plugin to the NixOS binary
         setup = ''
           require("codeium").setup({
-              enable_chat = true
+              enable_chat = true,
+              tools = {
+                  -- This is the magic line that fixes it on NixOS
+                  language_server = "${pkgs.codeium}/bin/codeium_language_server",
+              }
           })
         '';
       };
