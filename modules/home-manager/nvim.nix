@@ -6,21 +6,23 @@
 }:
 
 let
-  # Load your general config (Partial file)
+  # Import the General Config
   generalConfig = import ../nvf-config.nix { inherit pkgs; };
 in
 {
   imports = [
     inputs.nvf.homeManagerModules.default
-    # Import Avante as a proper module now
+
+    # IMPORT AVANTE HERE
+    # This forces it to read the file from disk every time
     ../../modules/avante.nix
   ];
 
   programs.nvf = {
     enable = true;
 
-    # We only apply the general config here.
-    # Avante is handled via the imports above.
+    # We apply the general settings, but Avante is handled
+    # automatically by the import above.
     settings = generalConfig;
   };
 }
