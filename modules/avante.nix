@@ -34,7 +34,7 @@
                 -- Do NOT specify 'endpoint'. Let Avante find Google automatically.
                 
                 -- This is the exact model name for the free tier
-                model = "gemini-1.5-flash",
+                model = "gemini-1.5-pro",
                 
                 api_key_name = "GEMINI_API_KEY",
                 
