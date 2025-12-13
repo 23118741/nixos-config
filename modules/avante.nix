@@ -25,18 +25,22 @@
           require('avante').setup({
             provider = "gemini", 
             
-            -- Keep this FALSE to save API calls for when you actually ask questions
-            auto_suggestions = false, 
-            
-            -- Keep this FALSE to save tokens (it runs the prompt twice otherwise)
+            -- Keep Ghost Text OFF to save RPM (Requests Per Minute)
+            auto_suggestions = false,
             dual_boost = { enabled = false },
 
             providers = {
               gemini = {
-                model = "gemini-2.5-flash",
+                -- Switch to the LITE model found in your list
+                -- This is the most efficient model for large context
+                model = "gemini-2.0-flash-lite",
+                
                 api_key_name = "GEMINI_API_KEY",
+                
                 temperature = 0,
-                max_tokens = 30000,
+                
+                -- Gemini Flash/Lite supports large output, 8192 is a safe max for summaries
+                max_tokens = 8192,
               },
             },
           })
