@@ -2,22 +2,30 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/i3.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../modules/i3.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   # Bootloader.
-  boot.loader.grub.enable = false;             # IMPORTANT: Explicitly disable GRUB
-  boot.loader.systemd-boot.enable = true;      # Enable systemd-boot
+  boot.loader.grub.enable = false; # IMPORTANT: Explicitly disable GRUB
+  boot.loader.systemd-boot.enable = true; # Enable systemd-boot
   boot.loader.efi.canTouchEfiVariables = true; # Allow it to register with BIOS
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -79,9 +87,12 @@
   users.users.guus = {
     isNormalUser = true;
     description = "Guus";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -102,13 +113,12 @@
   ];
 
   home-manager = {
-    
+
     extraSpecialArgs = { inherit inputs; };
     users = {
       "guus" = import ./home.nix;
-      };
     };
-
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

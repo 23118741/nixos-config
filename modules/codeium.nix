@@ -15,8 +15,21 @@
         setup = ''
           require("codeium").setup({
               enable_chat = true,
-              -- We removed the 'tools' table. 
-              -- This tells Codeium to download the correct version automatically.
+              
+              -- FORCE VIRTUAL TEXT (The gray text)
+              virtual_text = {
+                  enabled = true,
+                  -- Set to false to auto-trigger (default)
+                  manual = false,
+                  -- Ensure Tab key works
+                  map_keys = true,
+                  -- Ensure it works in all file types
+                  filetypes = {
+                      python = true,
+                      javascript = true,
+                      nix = true,
+                  }
+              }
           })
         '';
       };
