@@ -27,7 +27,6 @@
 
           -- 2. Configure Avante for OpenRouter (Mistral)
           require('avante').setup({
-            -- We use the OpenAI driver because OpenRouter mimics OpenAI
             provider = "openai", 
             
             -- Disable auto-suggestions to prevent hitting Rate Limits
@@ -36,16 +35,15 @@
             providers = {
               openai = {
                 endpoint = "https://openrouter.ai/api/v1",
-                
-                -- The OpenRouter ID for Mistral's Free Coding Model
                 model = "mistralai/codestral-2501:free",
-                
                 api_key_name = "OPENROUTER_API_KEY",
+                timeout = 30000,
                 
-                -- Mistral supports large context, but outputting 8k is safe
-                max_tokens = 8192,
-                
-                temperature = 0,
+                -- FIX: Move parameters inside this table to avoid Deprecation Warning
+                extra_request_body = {
+                  max_tokens = 8192,
+                  temperature = 0,
+                },
               },
             },
           })
