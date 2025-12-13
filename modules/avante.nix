@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # We use the full path so this file is a valid standalone module
   programs.nvf.settings.vim = {
 
     extraPackages = with pkgs; [ curl ];
@@ -21,18 +20,27 @@
       avante-nvim = {
         package = avante-nvim;
         setup = ''
+          -- Force UI load
           require('dressing').setup()
 
           require('avante').setup({
             provider = "openai", 
+            
+            -- Disable ghost text to save rate limits
             auto_suggestions = false,
             
             providers = {
               openai = {
                 endpoint = "https://openrouter.ai/api/v1",
-                model = "mistralai/codestral-2501:free",
-                api_key_name = "OPENROUTER_API_KEY",
+                
+                -- The requested Mistral Devstral model
+                model = "mistralai/devstral-2512:free",
+                
+                -- Your specific API Key variable name
+                api_key_name = "API_KEY",
+                
                 timeout = 30000,
+                
                 extra_request_body = {
                   max_tokens = 8192,
                   temperature = 0,
