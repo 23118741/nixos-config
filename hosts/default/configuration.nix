@@ -21,6 +21,7 @@
   boot.loader.grub.enable = false; # IMPORTANT: Explicitly disable GRUB
   boot.loader.systemd-boot.enable = true; # Enable systemd-boot
   boot.loader.efi.canTouchEfiVariables = true; # Allow it to register with BIOS
+  boot.loader.systemd-boot.configurationLimit = 5; # Sets maximum configs in boot menu to 5
 
   nix.settings.experimental-features = [
     "nix-command"
