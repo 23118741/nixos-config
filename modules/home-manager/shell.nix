@@ -20,4 +20,8 @@
     enable = true;
     nix-direnv.enable = true;
   };
+  shellAliases = {
+    # Pull latest config from GitHub + rebuild
+    update-system = "cd ~/nixos-config && git pull && sudo nixos-rebuild switch --flake .#default && echo 'System updated from GitHub!'";
+  };
 }
