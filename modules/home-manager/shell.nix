@@ -1,38 +1,36 @@
 { pkgs, ... }:
 
 {
-  # 1. Bash Configuration (Aliases & Behavior)
   programs.bash = {
     enable = true;
     enableCompletion = true;
+
     shellAliases = {
-      # ── System updates ───────────────────────
-      update-system = ''
-        cd ~/nixos-config && 
-        git pull && 
-        sudo nixos-rebuild switch --flake .#default && 
-        echo "System updated from GitHub!"
-      '';
+      # ── System ───
+      update-system = "cd ~/nixos-config && git pull && sudo nixos-rebuild switch --flake .#default && echo 'System updated!'";
+      please = "sudo"; # polite sudo
 
-      # ── Web project shortcuts ─────────────────
-      veiling = "cd ~/Projects/github.com/guus/VeilingAIWebApplicatieRealNotFake && direnv reload";
-      backend = "veiling && cd backend && ASPNETCORE_URLS=http://localhost:5000 dotnet watch";
-      frontend = "veiling && cd frontend && npm run dev";
-      db-up = "veiling && docker compose up -d";
-      db-down = "veiling && docker compose down";
+      # ── Project: Veiling ───
+      veiling = "cd ~/Projects/github.com/guus/VeilingAIWebApplicatieRealNotFake";
 
-      # ── General quality of life ───────────────
+      # We use 'direnv exec .' to force load the flake tools before running
+      frontend = "veiling && direnv exec . npm run dev --prefix frontend";
+      backend = "veiling && ASPNETCORE_URLS=http://localhost:5000 direnv exec . dotnet watch --project backend";
+      db-up = "veiling && direnv exec . docker compose up -d";
+      db-down = "veiling && direnv exec . docker compose down";
+
+      # ── Utils ─────
       ls = "ls --color=auto";
       ll = "ls -lah";
       grep = "grep --color=auto";
-      please = "sudo"; # polite sudo
-      # git shortcuts
+
+      # ── Git ───────
       ga = "git add .";
       gc = "git commit -m";
       gp = "git push";
     };
   };
-  # 2. Direnv (Project Environment Manager)
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
