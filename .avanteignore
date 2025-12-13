@@ -1,0 +1,15 @@
+# Ignore the massive lock file (Saves thousands of tokens)
+flake.lock
+
+# Ignore build results
+result
+result-*
+
+# Ignore Git internals
+.git/
+
+# Ignore secrets if they exist locally
+secrets.nix
+
+# Ignore hardware config (usually irrelevant for logic questions)
+hardware-configuration.nix
