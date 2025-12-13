@@ -7,7 +7,7 @@
 
     extraPlugins = with pkgs.vimPlugins; {
 
-      # Remove 'setup' here to let Avante handle it
+      # Remove setup here
       dressing-nvim = {
         package = dressing-nvim;
       };
@@ -25,23 +25,21 @@
           -- 1. Force load the UI dependency FIRST
           require('dressing').setup()
 
-          -- 2. Now load Avante
+          -- 2. Load Avante with Native Gemini support
           require('avante').setup({
             provider = "gemini", 
             
             providers = {
               gemini = {
-                -- Explicitly point to the OpenAI-compatible endpoint
-                endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/",
+                -- Do NOT specify 'endpoint'. Let Avante find Google automatically.
                 
-                -- Use the exact versioned model name
-                model = "gemini-1.5-flash-latest",
+                -- This is the exact model name for the free tier
+                model = "gemini-1.5-flash",
                 
-                -- Ensure the key name is set
                 api_key_name = "GEMINI_API_KEY",
                 
                 temperature = 0,
-                max_tokens = 4096,
+                max_tokens = 32000, -- Flash supports huge context
               },
             },
           })
