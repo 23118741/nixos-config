@@ -24,19 +24,17 @@
           require('dressing').setup()
 
           require('avante').setup({
-            provider = "openai", 
+            provider = "gemini", 
             
             providers = {
-              openai = {
-                endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/",
-                model = "gemini-1.5-flash",
+              gemini = {
+                -- Using the specific model you found
+                model = "gemini-2.5-flash",
+                
                 api_key_name = "GEMINI_API_KEY",
                 
-                -- FIX: Move parameters inside this new table
-                extra_request_body = {
-                  temperature = 0,
-                  max_tokens = 4096,
-                },
+                temperature = 0,
+                max_tokens = 30000,
               },
             },
           })
