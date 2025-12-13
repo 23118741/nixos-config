@@ -20,7 +20,13 @@
       avante-nvim = {
         package = avante-nvim;
         setup = ''
-          require('dressing').setup()
+          require('dressing').setup({
+            input = {
+              prompt = "➤ ",
+              border = "rounded",
+              width = 80,
+            }
+          })
 
           require('avante').setup({
             provider = "openai", 
