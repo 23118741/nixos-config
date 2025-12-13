@@ -15,6 +15,8 @@
     ./hardware-configuration.nix
     ../../modules/i3.nix
     inputs.home-manager.nixosModules.default
+
+    (import /home/guus/nixos-config/hosts/default/secrets.nix)
   ];
 
   # Bootloader.
