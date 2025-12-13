@@ -25,13 +25,15 @@
           require('avante').setup({
             provider = "groq", 
             
-            -- CHANGE: "vendors" is now "providers"
             providers = {
               groq = {
                 __inherited_from = "openai",
                 api_key_name = "GROQ_API_KEY",
                 endpoint = "https://api.groq.com/openai/v1/",
-                model = "llama-3.3-70b-versatile",
+                
+                -- CHANGE THIS LINE: Use the smaller, faster model
+                model = "llama-3.1-8b-instant", 
+                
                 max_tokens = 4096,
               },
             },
