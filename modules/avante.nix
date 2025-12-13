@@ -33,7 +33,7 @@
               gemini = {
                 -- Switch to the LITE model found in your list
                 -- This is the most efficient model for large context
-                model = "gemini-2.0-flash-lite",
+                model = "gemini-2.0-flash",
                 
                 api_key_name = "GEMINI_API_KEY",
                 
