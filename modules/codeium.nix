@@ -3,11 +3,11 @@
 {
   programs.nvf.settings.vim = {
 
-    # Codeium needs these system tools to run its language server
+    # Codeium requirements
     extraPackages = with pkgs; [
       gzip
       curl
-      uname
+      coreutils # <--- Changed from 'uname' to 'coreutils'
     ];
 
     extraPlugins = with pkgs.vimPlugins; {
