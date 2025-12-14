@@ -131,6 +131,7 @@
     sl
     git
     warpinator
+    steam
   ];
 
   home-manager = {
