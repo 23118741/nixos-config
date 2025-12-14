@@ -63,6 +63,17 @@
           type = [ "nixfmt" ];
         };
       };
+      csharp = {
+        enable = true;
+        lsp = {
+          enable = true;
+          servers = [ "omnisharp" ];
+        };
+        format = {
+          enable = true;
+          type = [ "dotnet-format" ];
+        };
+      }
     };
   };
 }
