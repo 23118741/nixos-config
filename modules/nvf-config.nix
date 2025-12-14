@@ -73,7 +73,7 @@
           enable = true;
           type = [ "dotnet-format" ];
         };
-      }
+      };
     };
   };
 }
