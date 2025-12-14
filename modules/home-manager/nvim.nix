@@ -34,26 +34,6 @@ in
             };
           };
 
-          # Enhanced diagnostic display for multiple languages
-          lsp = {
-            diagnostic = {
-              enable = true;
-              signs = true;
-              virtual_text = {
-                enable = true;
-                prefix = " ";
-                space_char = " ";
-              };
-              update_in_insert = false;
-              severity = {
-                error = "error";
-                warning = "warning";
-                information = "info";
-                hint = "hint";
-              };
-            };
-
-          };
         };
       }
     ];
