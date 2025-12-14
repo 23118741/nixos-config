@@ -40,8 +40,13 @@ in
   };
 
   config = mkIf cfg.enable {
+    # CRITICAL: Fixes the dconf/gsettings error
+    programs.dconf.enable = true;
+
+    # Install the package
     environment.systemPackages = [ pkgs.warpinator ];
 
+    # Open the ports
     networking.firewall = mkIf cfg.openFirewall {
       allowedTCPPorts = cfg.tcpPorts;
       allowedUDPPorts = cfg.udpPorts;
