@@ -69,10 +69,6 @@
           enable = true;
           servers = "omnisharp";
         };
-        format = {
-          enable = true;
-          type = "dotnet-format";
-        };
       };
     };
   };
