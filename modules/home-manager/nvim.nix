@@ -34,62 +34,64 @@ in
         };
 
         # Enhanced diagnostic display for multiple languages
-        vim.lsp.diagnostic = {
-          enable = true;
-          signs = true;
-          virtual_text = {
+        lsp = {
+          diagnostic = {
             enable = true;
-            prefix = " ";
-            space_char = " ";
+            signs = true;
+            virtual_text = {
+              enable = true;
+              prefix = " ";
+              space_char = " ";
+            };
+            update_in_insert = false;
+            severity = {
+              error = "error";
+              warning = "warning";
+              information = "info";
+              hint = "hint";
+            };
           };
-          update_in_insert = false;
-          severity = {
-            error = "error";
-            warning = "warning";
-            information = "info";
-            hint = "hint";
+
+          # Language-specific LSP configurations
+          csharp = {
+            enable = true;
+            on_attach = ''
+              require('lsp_signature').on_attach()
+              require('lsp-colors').setup()
+            '';
           };
-        };
 
-        # Language-specific LSP configurations
-        vim.lsp.csharp = {
-          enable = true;
-          on_attach = ''
-            require('lsp_signature').on_attach()
-            require('lsp-colors').setup()
-          '';
-        };
+          typescript = {
+            enable = true;
+            on_attach = ''
+              require('lsp_signature').on_attach()
+              require('lsp-colors').setup()
+            '';
+          };
 
-        vim.lsp.typescript = {
-          enable = true;
-          on_attach = ''
-            require('lsp_signature').on_attach()
-            require('lsp-colors').setup()
-          '';
-        };
+          html = {
+            enable = true;
+            on_attach = ''
+              require('lsp_signature').on_attach()
+              require('lsp-colors').setup()
+            '';
+          };
 
-        vim.lsp.html = {
-          enable = true;
-          on_attach = ''
-            require('lsp_signature').on_attach()
-            require('lsp-colors').setup()
-          '';
-        };
+          css = {
+            enable = true;
+            on_attach = ''
+              require('lsp_signature').on_attach()
+              require('lsp-colors').setup()
+            '';
+          };
 
-        vim.lsp.css = {
-          enable = true;
-          on_attach = ''
-            require('lsp_signature').on_attach()
-            require('lsp-colors').setup()
-          '';
-        };
-
-        vim.lsp.json = {
-          enable = true;
-          on_attach = ''
-            require('lsp_signature').on_attach()
-            require('lsp-colors').setup()
-          '';
+          json = {
+            enable = true;
+            on_attach = ''
+              require('lsp_signature').on_attach()
+              require('lsp-colors').setup()
+            '';
+          };
         };
       }
     ];

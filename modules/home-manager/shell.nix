@@ -7,7 +7,7 @@
 
     shellAliases = {
       # ── System ───
-      update-system = "cd ~/nixos-config && git pull && sudo nixos-rebuild switch --flake .#default && echo 'System updated!'";
+      update-system = "cd ~/nixos-config && git pull && sudo nixos-rebuild switch --flake .#default --impure echo 'System updated!'";
       please = "sudo"; # polite sudo
 
       # ── Project: Veiling ───
