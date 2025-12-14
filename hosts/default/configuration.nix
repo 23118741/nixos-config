@@ -14,6 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/i3.nix
+    ../../modules/warpinator.nix
     inputs.home-manager.nixosModules.default
 
     (import /home/guus/nixos-config/hosts/default/secrets.nix)
