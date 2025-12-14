@@ -121,7 +121,6 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.steam.enable = true;
-  programs.magic-wormhole.enable = true;
   programs.windsurf.enable = true;
 
   # List packages installed in system profile. To search, run:
