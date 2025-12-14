@@ -14,7 +14,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/i3.nix
-    ../../modules/warpinator.nix
     inputs.home-manager.nixosModules.default
 
     (import /home/guus/nixos-config/hosts/default/secrets.nix)
@@ -122,6 +121,8 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.steam.enable = true;
+  programs.magic-wormhole.enable = true;
+  programs.windsurf.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -134,6 +135,7 @@
     git
     warpinator
     steam
+    windsurf
   ];
 
   home-manager = {
