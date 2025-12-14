@@ -40,14 +40,18 @@ in
   };
 
   config = mkIf cfg.enable {
-    # 1. Enable dconf program (required for settings)
+    # 1. Enable dconf (Critical for settings)
     programs.dconf.enable = true;
 
-    # 2. Register dconf with DBus explicitly so the service can be found
+    # 2. Tell DBus where to find the dconf service file
     services.dbus.packages = [ pkgs.dconf ];
 
-    # 3. Install Warpinator
-    environment.systemPackages = [ pkgs.warpinator ];
+    # 3. Install packages
+    environment.systemPackages = with pkgs; [
+      warpinator
+      glib # Helpers for gsettings
+      gsettings-desktop-schemas # Standard schemas
+    ];
 
     # 4. Open Firewall
     networking.firewall = mkIf cfg.openFirewall {
