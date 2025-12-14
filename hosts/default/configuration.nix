@@ -132,6 +132,7 @@
     alacritty
     sl
     git
+    warpinator
   ];
 
   home-manager = {
