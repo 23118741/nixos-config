@@ -40,20 +40,26 @@ in
   };
 
   config = mkIf cfg.enable {
-    # 1. Enable dconf (Critical for settings)
+    # 1. Critical: Enable dconf and put it in system path
     programs.dconf.enable = true;
 
-    # 2. Tell DBus where to find the dconf service file
-    services.dbus.packages = [ pkgs.dconf ];
+    # 2. Enable GVFS: Often required for file-transfer apps to interact with DBus correctly
+    services.gvfs.enable = true;
 
-    # 3. Install packages
-    environment.systemPackages = with pkgs; [
-      warpinator
-      glib # Helpers for gsettings
-      gsettings-desktop-schemas # Standard schemas
+    # 3. Register services with DBus explicitly
+    services.dbus.packages = with pkgs; [
+      dconf
+      gvfs
     ];
 
-    # 4. Open Firewall
+    # 4. Install packages
+    environment.systemPackages = with pkgs; [
+      warpinator
+      dconf # The binary itself
+      libnotify # For notifications
+    ];
+
+    # 5. Open Firewall
     networking.firewall = mkIf cfg.openFirewall {
       allowedTCPPorts = cfg.tcpPorts;
       allowedUDPPorts = cfg.udpPorts;
