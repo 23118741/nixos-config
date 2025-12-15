@@ -50,7 +50,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/PC/configuration.nix
-          inputs.home-manager.nixosModules.PC
+          inputs.home-manager.nixosModules.default
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
