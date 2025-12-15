@@ -25,6 +25,11 @@
   boot.loader.efi.canTouchEfiVariables = true; # Allow it to register with BIOS
   boot.loader.systemd-boot.configurationLimit = 5; # Sets maximum configs in boot menu to 5
 
+  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = false;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -33,9 +38,6 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -57,6 +59,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  networking.networkmanager.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -121,7 +124,7 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.steam.enable = true;
-
+  programs.windsurf.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -134,6 +137,8 @@
     warpinator
     steam
     windsurf
+    dbus # Required for Warpinator's D-Bus functionality
+    dconf # Required to prevent dconf/gdbus errors with Warpinator
   ];
 
   home-manager = {
