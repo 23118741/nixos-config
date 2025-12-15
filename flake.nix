@@ -46,10 +46,10 @@
         ];
       };
 
-      nixosConfigurations.webDev = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.PC = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/webDev/configuration.nix
+          ./hosts/PC/configuration.nix
           inputs.home-manager.nixosModules.default
           {
             home-manager.useGlobalPkgs = true;
