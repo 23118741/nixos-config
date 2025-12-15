@@ -59,7 +59,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  networking.networkmanager.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
